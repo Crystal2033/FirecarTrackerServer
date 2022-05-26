@@ -1,0 +1,14 @@
+version: '3'
+services:
+  dev_tracker:
+    image: fireman_tracker
+    container_name: dev_fireman_tracker
+    environment:
+      - spring.profiles.active=dev
+    ports:
+      - "18711:18711"
+
+networks:
+  default:
+    external:
+      name: dev_tracker_net

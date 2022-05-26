@@ -1,0 +1,15 @@
+version: '3'
+services:
+  tracker:
+    image: fireman_tracker
+    container_name: fireman_tracker
+    environment:
+      - spring.profiles.active=prod
+    ports:
+      - "18712:18712"
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: tracker_net
