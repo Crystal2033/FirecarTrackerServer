@@ -16,17 +16,19 @@ import java.util.List;
 @Setter
 @Table(name="VehiclePositions")
 public class VehiclePositionsEntity {
-
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid") // генерация id
     @Column(length = 32, updatable = false, nullable = false)
+    private String id;
+
+
 
     private float latitude;
     private float longitude;
 
-// #TODO:
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-//    private List<VehiclePositionsEntity> userLots;
+    @ManyToOne
+    @JoinColumn(name = "pos_block_id")
+    private PositionsBlockEntity posBlock;
 
 }

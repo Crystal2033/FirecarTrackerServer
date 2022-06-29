@@ -19,6 +19,11 @@ public class VehicleStatEntity {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid") // генерация id
     @Column(length = 32, updatable = false, nullable = false)
+    private String id;
+
+    @OneToOne (mappedBy = "vehicleId")
+    @JoinColumn (name="pos_block_head_id")
+    private PositionsBlockEntity posBlockHead;
 
     private int vehicleId;
 
