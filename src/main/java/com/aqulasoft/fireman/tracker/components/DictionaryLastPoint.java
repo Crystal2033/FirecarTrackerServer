@@ -31,4 +31,9 @@ public class DictionaryLastPoint {
         return new DictionaryLastPointDto(false, null);
     }
 
+    public List<VehiclePositionDto> getListOfVehicle(String eventId)
+    {
+        return vehiclePositionDictionary.get(eventId);
+    }
+
 }
