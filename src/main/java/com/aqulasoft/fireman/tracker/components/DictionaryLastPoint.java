@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 @Component
 public class DictionaryLastPoint {
-    private HashMap<String, ArrayList<VehiclePositionDto>> dictionary;
+    private final HashMap<String, ArrayList<VehiclePositionDto>> dictionary = new HashMap<>();
     static final Integer maxSize = 100;
 
     private BoolPair<ArrayList<VehiclePositionDto>> addPoint(String eventId, VehiclePositionDto positionDto) {
