@@ -1,4 +1,4 @@
-package com.aqulasoft.fireman.tracker.models.entities;
+package com.aqulasoft.fireman.tracker.database.entities;
 
 
 import lombok.Getter;

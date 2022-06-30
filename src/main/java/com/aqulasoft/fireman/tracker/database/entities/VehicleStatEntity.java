@@ -19,6 +19,7 @@ public class VehicleStatEntity {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid") // генерация id
     @Column(length = 32, updatable = false, nullable = false)
+    private String id; // primary key in data base
 
     private int vehicleId;
 
