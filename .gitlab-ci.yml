@@ -2,6 +2,9 @@
 include:
   - template: Code-Quality.gitlab-ci.yml
     
+variables:
+  GIT_STRATEGY: clone
+
 .merge-only-rules:
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
