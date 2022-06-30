@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -19,10 +20,16 @@ public class VehicleStatEntity {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid") // генерация id
     @Column(length = 32, updatable = false, nullable = false)
-    private String id; // primary key in data base
+    private String id;
+
+    @OneToOne (mappedBy = "vehicleId")
+    @JoinColumn (name="pos_block_head_id")
+    private EventBlockEntity posBlockHead;
 
     private int vehicleId;
 
+    private LocalDateTime createTime;
+    private LocalDateTime lastChangeTime;
 
 }
 
