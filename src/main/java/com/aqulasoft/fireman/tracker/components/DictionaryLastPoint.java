@@ -1,13 +1,31 @@
 package com.aqulasoft.fireman.tracker.components;
 
+import com.aqulasoft.fireman.tracker.models.DictionaryLastPointDto;
 import com.aqulasoft.fireman.tracker.models.VehiclePositionDto;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 public class DictionaryLastPoint {
+    int maxNumberOfPositionInDictionary = 100;
+    final private HashMap<String, List<VehiclePositionDto>> vehiclePositionDictionary = new HashMap<>();
 
+    public DictionaryLastPointDto addToDictionary(String eventId, VehiclePositionDto vehiclePositionDto) {
+        List<VehiclePositionDto> listOfVehiclePositions = vehiclePositionDictionary.get(eventId);
+        if (listOfVehiclePositions == null) {
+            vehiclePositionDictionary.put(eventId, Arrays.asList(vehiclePositionDto));
+            return new DictionaryLastPointDto(false, null);
+        }
+
+        listOfVehiclePositions.add(vehiclePositionDto);
+        //vehiclePositionDictionary.put(eventId, listOfVehiclePositions);
+        if (listOfVehiclePositions.size() == maxNumberOfPositionInDictionary) {
+            return new DictionaryLastPointDto(true, listOfVehiclePositions);
+        }
+        return new DictionaryLastPointDto(false, null);
+    }
 
 }
