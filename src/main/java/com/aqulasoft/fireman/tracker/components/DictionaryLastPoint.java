@@ -8,6 +8,6 @@ import java.util.HashMap;
 
 @Component
 public class DictionaryLastPoint {
-    @Bean
-    public HashMap<String, VehiclePositionDto> getDictionary() {return new HashMap<>(); }
+
+
 }

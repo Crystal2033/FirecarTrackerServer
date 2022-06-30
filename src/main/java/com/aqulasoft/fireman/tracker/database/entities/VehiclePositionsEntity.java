@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -22,13 +23,14 @@ public class VehiclePositionsEntity {
     @Column(length = 32, updatable = false, nullable = false)
     private String id;
 
-
-
     private float latitude;
     private float longitude;
 
     @ManyToOne
     @JoinColumn(name = "pos_block_id")
-    private PositionsBlockEntity posBlock;
+    private EventBlockEntity posBlock;
+
+    private LocalDateTime createTime;
+    private LocalDateTime lastChangeTime;
 
 }

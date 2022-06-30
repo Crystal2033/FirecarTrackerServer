@@ -1,5 +1,7 @@
 package com.aqulasoft.fireman.tracker.models;
 
 public class VehiclePositionRequest {
-//TODO: Need to think what is needed.
+    private String id;
+    private float longitude;
+    private float latitude;
 }
