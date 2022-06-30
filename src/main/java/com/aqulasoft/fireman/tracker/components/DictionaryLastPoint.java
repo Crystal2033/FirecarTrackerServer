@@ -4,6 +4,7 @@ import com.aqulasoft.fireman.tracker.models.DictionaryLastPointDto;
 import com.aqulasoft.fireman.tracker.models.VehiclePositionDto;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,9 @@ public class DictionaryLastPoint {
     public DictionaryLastPointDto addToDictionary(String eventId, VehiclePositionDto vehiclePositionDto) {
         List<VehiclePositionDto> listOfVehiclePositions = vehiclePositionDictionary.get(eventId);
         if (listOfVehiclePositions == null) {
-            vehiclePositionDictionary.put(eventId, Arrays.asList(vehiclePositionDto));
+            List<VehiclePositionDto> list = new ArrayList<>();
+            list.add(vehiclePositionDto);
+            vehiclePositionDictionary.put(eventId, list);
             return new DictionaryLastPointDto(false, null);
         }
 
