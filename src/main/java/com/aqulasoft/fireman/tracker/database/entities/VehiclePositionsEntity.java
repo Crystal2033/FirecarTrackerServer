@@ -27,6 +27,8 @@ public class VehiclePositionsEntity {
     @JoinColumn(name = "pos_block_id")
     private EventBlockEntity posBlock;
 
+    private LocalDateTime registerPosTime;
+
     private LocalDateTime createTime;
     private LocalDateTime lastChangeTime;
 

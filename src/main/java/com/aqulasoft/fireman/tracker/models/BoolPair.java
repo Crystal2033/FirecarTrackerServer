@@ -1,8 +1,10 @@
 package com.aqulasoft.fireman.tracker.models;
 
+// first -- boolean -- flag for services to start loading data points in repo. True -- need to load in database.
+// second -- data points
+
 public class BoolPair<S> {
-    // first -- boolean -- flag for services to start loading data point in repo
-    // second -- data points
+
     private boolean first; //first member of pair
     private S second; //second member of pair
 
