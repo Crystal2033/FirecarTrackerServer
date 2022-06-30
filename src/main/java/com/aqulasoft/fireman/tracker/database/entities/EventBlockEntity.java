@@ -9,11 +9,6 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -27,11 +22,11 @@ public class EventBlockEntity {
     @Column(length = 32, updatable = false, nullable = false)
     private String id;
 
-    @OneToOne(mappedBy = "nextPosBlockId") // depends on itself
+    @OneToOne // depends on itself
     @JoinColumn(name="next_pos_block_id")
     private EventBlockEntity nextPosBlockId;
 
-    @OneToOne (mappedBy = "posBlockHead")
+    @OneToOne
     @JoinColumn (name="vehicle_id")
     private VehicleStatEntity vehicleId;
 

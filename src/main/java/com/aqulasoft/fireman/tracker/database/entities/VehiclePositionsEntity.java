@@ -1,21 +1,18 @@
 package com.aqulasoft.fireman.tracker.database.entities;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Entity
 @Getter
 @Setter
-@Table(name="VehiclePositions")
+@Table(name = "VehiclePositions")
 public class VehiclePositionsEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")
