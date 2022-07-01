@@ -1,8 +1,11 @@
 package com.aqulasoft.fireman.tracker.services.impl;
 
 import com.aqulasoft.fireman.tracker.components.VehiclePositionCache;
+import com.aqulasoft.fireman.tracker.exceptions.EmptyArrayException;
 import com.aqulasoft.fireman.tracker.models.VehiclePositionDto;
+import com.aqulasoft.fireman.tracker.models.VehiclePositionsRequest;
 import com.aqulasoft.fireman.tracker.services.TrackerServices;
+import lombok.val;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ public class TrackerServiceImpl implements TrackerServices {
     }
 
     @Override
-    public void addPositions(ArrayList<VehiclePositionDto> positions) {
-
+    public VehiclePositionsRequest addPositions(VehiclePositionsRequest positionsRequest) throws EmptyArrayException {
+        return positionsRequest;
     }
 }
