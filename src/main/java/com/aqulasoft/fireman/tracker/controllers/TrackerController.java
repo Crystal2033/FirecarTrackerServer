@@ -4,6 +4,7 @@ import com.aqulasoft.fireman.tracker.exceptions.EmptyArrayException;
 import com.aqulasoft.fireman.tracker.models.VehiclePositionsRequest;
 import com.aqulasoft.fireman.tracker.services.TrackerServices;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,8 @@ public class TrackerController {
     }
 
     @PostMapping("")
-    public VehiclePositionsRequest addPositions(VehiclePositionsRequest vehiclePositions) throws EmptyArrayException {
+    public VehiclePositionsRequest addPositions(@RequestBody VehiclePositionsRequest vehiclePositions) throws EmptyArrayException {
+
         return trackerServices.addPositions(vehiclePositions);
     }
 }

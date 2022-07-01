@@ -7,9 +7,13 @@ import com.aqulasoft.fireman.tracker.models.VehiclePositionsRequest;
 import com.aqulasoft.fireman.tracker.services.TrackerServices;
 import lombok.val;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+@Service
 public class TrackerServiceImpl implements TrackerServices {
     private final ModelMapper mapper;
     private final VehiclePositionCache dictionary;
@@ -25,8 +29,23 @@ public class TrackerServiceImpl implements TrackerServices {
         {
             throw new EmptyArrayException();
         }
+        List<VehiclePositionDto> vehiclePositions = positionsRequest.getPositions();
+        VehiclePositionDto lastVehiclePosition = vehiclePositions.get(vehiclePositions.size() - 1);
+        dictionary.addLastPoint(lastVehiclePosition.getEventId() ,lastVehiclePosition);
 
 
+        VehiclePositionDto previousPosition = null;
+        //1.
+        for(VehiclePositionDto position: vehiclePositions){
+            if (previousPosition == null)
+            {
+                previousPosition = position;
+                continue;
+            }
+
+
+            previousPosition = position;
+        }
         return positionsRequest;
     }
 }
