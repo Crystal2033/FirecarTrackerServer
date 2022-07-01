@@ -112,6 +112,21 @@ public class TrackerServiceImpl implements TrackerServices {
             }
         }
 
+        Optional<EventBlockEntity> currentEventBlockOptional
+                = eventBlockRepository.findOptionalById(vehiclePositions.get(vehiclePositions.size() - 1).getEventId());
+        EventBlockEntity currentEventBlockEntity = currentEventBlockOptional.orElseThrow(EmptyEventBlockException::new);
+
+        VehiclePositionEntity currentPosition = mapper.map(vehiclePositions.get(vehiclePositions.size() - 1), VehiclePositionEntity.class);
+
+        currentPosition.setPosBlock(currentEventBlockEntity);
+
+        List<VehiclePositionEntity> positionEntities = currentEventBlockEntity.getPositions();
+        positionEntities.add(currentPosition);
+        currentEventBlockEntity.setPositions(positionEntities);
+        eventBlockRepository.save(currentEventBlockEntity);
+
+        vehiclePositionRepository.save(currentPosition);
+
         dictionary.addLastPoint(
                 vehiclePositionsRequest.getVehicleId(),
                 vehiclePositions.get(vehiclePositions.size() - 1)
