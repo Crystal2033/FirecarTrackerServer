@@ -26,12 +26,12 @@ public class EventBlockEntity {
     @JoinColumn(name="next_pos_block_id")
     private EventBlockEntity nextPosBlockId;
 
-    @OneToOne
-    @JoinColumn (name="vehicle_id")
-    private VehicleStatEntity vehicleId;
+//    @OneToOne
+//    @JoinColumn (name="vehicle_id")
+//    private VehicleStatEntity vehicleId;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "posBlock")
-    private List<VehiclePositionsEntity> positions;
+    private List<VehiclePositionEntity> positions;
 
     private int driverId;
     private int eventId;
