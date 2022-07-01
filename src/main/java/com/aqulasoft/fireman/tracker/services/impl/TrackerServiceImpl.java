@@ -61,8 +61,6 @@ public class TrackerServiceImpl implements TrackerServices {
         } else if (!Objects.equals(lastPoint.getEventId(), vehiclePositions.get(0).getEventId())) {
             // послдений элемент предыдущего запроса имел другое событие, нужно закрыть прошлый блок и создать новый
             // Два соседних переданных массива имеют точки от разных блоков.
-            //Создаем блок
-
             EventBlockEntity newEventBlockEntity = new EventBlockEntity();
 
             Optional<VehicleStatEntity> vehicleOptional = vehicleStatRepository.findOptionalById(vehiclePositionsRequest.getVehicleId());
@@ -77,7 +75,6 @@ public class TrackerServiceImpl implements TrackerServices {
             eventBlockRepository.save(newEventBlockEntity);
         }
 
-        // проверка от первого до предпоследнего
 
         for (int i = 0; i < vehiclePositions.size() - 1; i++) {
             //TODO: продумать, как не вызывать постоянно eventBlockRepository для получения currentEventBlockEntity
