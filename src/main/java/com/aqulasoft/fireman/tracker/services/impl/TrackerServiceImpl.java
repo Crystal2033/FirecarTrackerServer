@@ -1,25 +1,25 @@
 package com.aqulasoft.fireman.tracker.services.impl;
 
 import com.aqulasoft.fireman.tracker.components.VehiclePositionCache;
-import com.aqulasoft.fireman.tracker.models.VehiclePositionDto;
+import com.aqulasoft.fireman.tracker.controllers.TrackerController;
+import com.aqulasoft.fireman.tracker.models.VehiclePositionsRequest;
 import com.aqulasoft.fireman.tracker.services.TrackerServices;
 import org.modelmapper.ModelMapper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TrackerServiceImpl implements TrackerServices {
     private final ModelMapper mapper;
     private final VehiclePositionCache dictionary;
+    private final TrackerController trackerController;
 
-    public TrackerServiceImpl(ModelMapper mapper, VehiclePositionCache dictionary) {
+
+    public TrackerServiceImpl(ModelMapper mapper, VehiclePositionCache dictionary, TrackerController trackerController) {
         this.mapper = mapper;
         this.dictionary = dictionary;
+        this.trackerController = trackerController;
     }
 
-    public List<VehiclePositionDto> addPositions(List<VehiclePositionDto> listPositionDto)
-    {
-
-        return new ArrayList<>();
+    @Override
+    public VehiclePositionsRequest addPositions(VehiclePositionsRequest vehiclePositionsRequest) {
+        return trackerController.addPositions(vehiclePositionsRequest);
     }
 }

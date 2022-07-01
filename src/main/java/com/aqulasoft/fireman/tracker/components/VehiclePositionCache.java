@@ -11,35 +11,14 @@ import java.util.HashMap;
 
 @Component
 public class VehiclePositionCache {
-    private final HashMap<String, ArrayList<VehiclePositionDto>> dictionary = new HashMap<>();
-    private static final Integer MAX_SIZE = 100;
+    private final HashMap<String, VehiclePositionDto> dictionary = new HashMap<>();
 
-    public Pair<Boolean, ArrayList<VehiclePositionDto>> addPoint(String eventId, VehiclePositionDto positionDto) {
-        ArrayList<VehiclePositionDto> arrPoints;
-
-        if((arrPoints = dictionary.get(eventId)) == null){ //creating list
-            arrPoints = new ArrayList<>();
-            dictionary.put(eventId, arrPoints);
-        }
-
-        else if(arrPoints.size() >= MAX_SIZE){
-            ArrayList<VehiclePositionDto> packPoints = new ArrayList<>(arrPoints);
-            arrPoints.clear();
-            arrPoints.add(positionDto);
-            return Pair.of(true, packPoints);
-        }
-
-        arrPoints.add(positionDto);
-        return Pair.of(false, arrPoints);
+    public void addLastPoint(String eventId, VehiclePositionDto positionDto) {
+        dictionary.put(eventId, positionDto);
     }
 
-    public ArrayList<VehiclePositionDto> loadPackPoints(String eventId)
-    {
-        if(!dictionary.containsKey(eventId))
-        {
-            return null;
-        }
-        return new ArrayList<>(dictionary.get(eventId));
+    public VehiclePositionDto getLastPoint(String eventId) {
+        return dictionary.get(eventId);
     }
 
 }

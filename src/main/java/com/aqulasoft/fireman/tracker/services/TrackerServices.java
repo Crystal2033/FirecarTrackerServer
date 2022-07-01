@@ -1,6 +1,7 @@
 package com.aqulasoft.fireman.tracker.services;
 
 import com.aqulasoft.fireman.tracker.models.VehiclePositionDto;
+import com.aqulasoft.fireman.tracker.models.VehiclePositionsRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,5 +11,5 @@ import java.util.List;
 public interface TrackerServices {
 
     //post
-    List<VehiclePositionDto> addPositions(List<VehiclePositionDto> listPositionDto);
+    VehiclePositionsRequest addPositions(VehiclePositionsRequest vehiclePositionsRequest);
 }

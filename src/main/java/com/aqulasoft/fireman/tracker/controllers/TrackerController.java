@@ -1,6 +1,7 @@
 package com.aqulasoft.fireman.tracker.controllers;
 
 import com.aqulasoft.fireman.tracker.models.VehiclePositionDto;
+import com.aqulasoft.fireman.tracker.models.VehiclePositionsRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +14,7 @@ import java.util.List;
 @RequestMapping("/api/tracker")
 public class TrackerController {
     @PostMapping("")
-    public List<VehiclePositionDto> addPositions(List<VehiclePositionDto> listPositionDto)
-    {
-        return new ArrayList<>();
+    public VehiclePositionsRequest addPositions(VehiclePositionsRequest vehiclePositionDto) {
+        return vehiclePositionDto;
     }
 }

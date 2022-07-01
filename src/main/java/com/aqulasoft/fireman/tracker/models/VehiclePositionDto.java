@@ -11,5 +11,4 @@ public class VehiclePositionDto {
     private LocalDateTime positionTime;
     private float longitude;
     private float latitude;
-    private LocalDateTime positionTime;
 }
