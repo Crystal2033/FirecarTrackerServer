@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "VehiclePositions")
-public class VehiclePositionsEntity {
+@Table(name = "VehiclePosition")
+public class VehiclePositionEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid") // генерация id
@@ -27,7 +27,6 @@ public class VehiclePositionsEntity {
     @JoinColumn(name = "pos_block_id")
     private EventBlockEntity posBlock;
 
-    private LocalDateTime createTime;
-    private LocalDateTime lastChangeTime;
+    private LocalDateTime registerPosTime;
 
 }
