@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VehiclePositionRepository extends JpaRepository<VehiclePositionEntity, String> {
-    Optional<VehiclePositionEntity> findOptionalById(String betId);
+    Optional<VehiclePositionEntity> findOptionalById(String id);
     List<VehiclePositionEntity> findAllByPosBlockId(String id);
 }
