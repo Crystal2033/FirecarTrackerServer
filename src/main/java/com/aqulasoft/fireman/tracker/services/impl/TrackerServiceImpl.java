@@ -21,6 +21,12 @@ public class TrackerServiceImpl implements TrackerServices {
 
     @Override
     public VehiclePositionsRequest addPositions(VehiclePositionsRequest positionsRequest) throws EmptyArrayException {
+        if(positionsRequest.getPositions().isEmpty())
+        {
+            throw new EmptyArrayException();
+        }
+
+
         return positionsRequest;
     }
 }
