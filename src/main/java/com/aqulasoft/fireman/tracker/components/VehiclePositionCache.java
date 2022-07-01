@@ -14,7 +14,7 @@ public class VehiclePositionCache {
     private final HashMap<String, ArrayList<VehiclePositionDto>> dictionary = new HashMap<>();
     private static final Integer MAX_SIZE = 100;
 
-    private Pair<Boolean, ArrayList<VehiclePositionDto>> addPoint(String eventId, VehiclePositionDto positionDto) {
+    public Pair<Boolean, ArrayList<VehiclePositionDto>> addPoint(String eventId, VehiclePositionDto positionDto) {
         ArrayList<VehiclePositionDto> arrPoints;
 
         if((arrPoints = dictionary.get(eventId)) == null){ //creating list
