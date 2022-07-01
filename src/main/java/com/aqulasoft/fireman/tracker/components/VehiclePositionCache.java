@@ -13,12 +13,12 @@ import java.util.HashMap;
 public class VehiclePositionCache {
     private final HashMap<String, VehiclePositionDto> dictionary = new HashMap<>();
 
-    public void addLastPoint(String eventId, VehiclePositionDto positionDto) {
-        dictionary.put(eventId, positionDto);
+    public void addLastPoint(String vehicleId, VehiclePositionDto positionDto) {
+        dictionary.put(vehicleId, positionDto);
     }
 
-    public VehiclePositionDto getLastPoint(String eventId) {
-        return dictionary.get(eventId);
+    public VehiclePositionDto getLastPoint(String vehicleId) {
+        return dictionary.get(vehicleId);
     }
 
 }
