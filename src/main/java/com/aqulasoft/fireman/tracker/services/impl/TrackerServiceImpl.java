@@ -77,14 +77,14 @@ public class TrackerServiceImpl implements TrackerServices {
                 = eventBlockRepository.findOptionalById(vehiclePositions.get(0).getEventId());
         EventBlockEntity currentEventBlockEntity = currentEventBlockOptional.orElseThrow(EmptyEventBlockException::new);
 
-        List<VehiclePositionEntity> currentEventBlockPositions = new ArrayList<>();
+        List<VehiclePositionEntity> newPositionEntities = new ArrayList<>();
         for (int i = 0; i < vehiclePositions.size() - 1; i++) {
-            VehiclePositionEntity currentPositionEntity = mapper.map(vehiclePositions.get(i), VehiclePositionEntity.class);
-            currentPositionEntity.setPosBlock(currentEventBlockEntity);
+            VehiclePositionEntity newPositionEntity = mapper.map(vehiclePositions.get(i), VehiclePositionEntity.class);
+            newPositionEntity.setPosBlock(currentEventBlockEntity);
 
-            currentEventBlockPositions.add(currentPositionEntity);
+            newPositionEntities.add(newPositionEntity);
 
-            vehiclePositionRepository.save(currentPositionEntity); // may be don`t need
+            vehiclePositionRepository.save(newPositionEntity); // may be don`t need
 
             if (!Objects.equals(vehiclePositions.get(i).getEventId(), vehiclePositions.get(i + 1).getEventId())) {
                 // мы закрываем левый блок и создаем правый
@@ -94,30 +94,29 @@ public class TrackerServiceImpl implements TrackerServices {
                 newEventBlockEntity.setVehicleId(vehicle);
                 currentEventBlockEntity.setNextPosBlockId(newEventBlockEntity);
 
-                List<VehiclePositionEntity> positionEntities = currentEventBlockEntity.getPositions();
-                positionEntities.addAll(currentEventBlockPositions);
+                List<VehiclePositionEntity> allPositionsFromBlock = currentEventBlockEntity.getPositions();
+                allPositionsFromBlock.addAll(newPositionEntities);
 
-                currentEventBlockEntity.setPositions(positionEntities);
+                currentEventBlockEntity.setPositions(allPositionsFromBlock);
                 eventBlockRepository.save(currentEventBlockEntity);
-                positionEntities.clear();
+                newPositionEntities.clear();
 
                 currentEventBlockEntity = newEventBlockEntity;
                 eventBlockRepository.save(newEventBlockEntity);
             }
         }
         //Adding last element which was not added in the loop
-        VehiclePositionEntity currentPositionEntity = mapper.map(vehiclePositions.get(vehiclePositions.size() - 1), VehiclePositionEntity.class);
-        currentPositionEntity.setPosBlock(currentEventBlockEntity);
-        currentEventBlockPositions.add(currentPositionEntity);
+        VehiclePositionEntity newPositionEntity = mapper.map(vehiclePositions.get(vehiclePositions.size() - 1), VehiclePositionEntity.class);
+        newPositionEntity.setPosBlock(currentEventBlockEntity);
+        newPositionEntities.add(newPositionEntity);
 
-        List<VehiclePositionEntity> positionEntities = currentEventBlockEntity.getPositions();
-        positionEntities.addAll(currentEventBlockPositions);
+        List<VehiclePositionEntity> allPositionsFromBlock = currentEventBlockEntity.getPositions();
+        allPositionsFromBlock.addAll(newPositionEntities);
 
-        currentEventBlockEntity.setPositions(positionEntities);
+        currentEventBlockEntity.setPositions(allPositionsFromBlock);
         eventBlockRepository.save(currentEventBlockEntity);
-        positionEntities.clear();
 
-        vehiclePositionRepository.save(currentPositionEntity);
+        vehiclePositionRepository.save(newPositionEntity);
 
         dictionary.addLastPoint(
                 vehiclePositionsRequest.getVehicleId(),
