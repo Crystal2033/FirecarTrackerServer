@@ -22,11 +22,12 @@ public class VehiclePositionEntity {
 
     private float latitude;
     private float longitude;
+    private LocalDateTime positionTime;
 
     @ManyToOne
     @JoinColumn(name = "pos_block_id")
     private EventBlockEntity posBlock;
 
-    private LocalDateTime registerPosTime;
+
 
 }
