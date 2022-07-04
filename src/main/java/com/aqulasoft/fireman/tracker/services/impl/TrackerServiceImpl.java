@@ -41,7 +41,7 @@ public class TrackerServiceImpl implements TrackerServices {
     public VehiclePositionsRequest addPositions(VehiclePositionsRequest vehiclePositionsRequest)
             throws EmptyArrayException, EmptyVehicleException, EmptyEventBlockException {
 
-        if(vehiclePositionsRequest.getPositions().isEmpty()){
+        if (vehiclePositionsRequest.getPositions().isEmpty()) {
             throw new EmptyArrayException();
         }
 
