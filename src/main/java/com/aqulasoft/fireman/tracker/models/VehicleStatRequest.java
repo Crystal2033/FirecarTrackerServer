@@ -1,5 +1,9 @@
 package com.aqulasoft.fireman.tracker.models;
 
-public class VehicleStatRequest {
+import lombok.Data;
 
+@Data
+public class VehicleStatRequest {
+    String id;
+    String vehicleId;
 }

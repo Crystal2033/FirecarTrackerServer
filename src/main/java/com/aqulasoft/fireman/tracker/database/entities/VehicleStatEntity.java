@@ -26,7 +26,7 @@ public class VehicleStatEntity {
     @JoinColumn (name="pos_block_head_id")
     private EventBlockEntity posBlockHead;
 
-    private int vehicleId;
+    private String vehicleId;
 
     private LocalDateTime createTime;
     private LocalDateTime lastChangeTime;

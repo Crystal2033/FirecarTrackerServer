@@ -10,6 +10,5 @@ public class VehiclePositionDto {
     private float longitude;
     private float latitude;
     private LocalDateTime positionTime;
-
     private String eventId;
 }
