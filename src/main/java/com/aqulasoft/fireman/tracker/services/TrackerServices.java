@@ -10,6 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface TrackerServices {
     VehiclePositionsRequest addPositions(VehiclePositionsRequest vehiclePositionsRequest) throws EmptyArrayException,
-            EmptyVehicleException, EmptyEventBlockException;
+            EmptyVehicleException;
 
 }

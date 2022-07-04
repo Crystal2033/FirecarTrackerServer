@@ -2,6 +2,7 @@ package com.aqulasoft.fireman.tracker.database.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,6 +23,9 @@ public class VehiclePositionEntity {
 
     private float latitude;
     private float longitude;
+
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP") // генерация даты
     private LocalDateTime positionTime;
 
     @ManyToOne

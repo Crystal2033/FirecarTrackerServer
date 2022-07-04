@@ -32,15 +32,20 @@ public class EventBlockEntity {
     @JoinColumn(name="next_pos_block_id")
     private EventBlockEntity nextPosBlockId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn (name="vehicle_id")
     private VehicleStatEntity vehicleId;
+
+    @OneToOne(mappedBy="lastEventBlockId")
+    @JoinColumn(name="link_vehicle_id")
+    private VehicleStatEntity linkVehicleId; //don`t using
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "posBlock")
     private List<VehiclePositionEntity> positions;
 
-    private int driverId;
-    private int eventId;
+    private String driverId;
+    private String eventId;
     private String googleGeo;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
