@@ -1,5 +1,6 @@
 package com.aqulasoft.fireman.tracker.database.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -44,6 +45,9 @@ public class EventBlockEntity {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP") // генерация даты
     private LocalDateTime createTime;
+
     private LocalDateTime lastChangeTime;
 }

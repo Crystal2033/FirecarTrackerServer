@@ -3,6 +3,7 @@ package com.aqulasoft.fireman.tracker.database.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -26,8 +27,10 @@ public class VehicleStatEntity {
     @JoinColumn (name="pos_block_head_id")
     private EventBlockEntity posBlockHead;
 
-    private int vehicleId;
+    private String vehicleId;
 
+    @CreationTimestamp
+    @Column(columnDefinition = "TIMESTAMP") // генерация даты
     private LocalDateTime createTime;
     private LocalDateTime lastChangeTime;
 
