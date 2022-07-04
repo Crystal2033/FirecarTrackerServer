@@ -54,10 +54,11 @@ public class TrackerServiceImpl implements TrackerServices {
         if (lastPointFromCache == null) {
             // нет машины в словаре (с прошлых запросов). Создаем блок. То есть это начало работы машины. Создается голова списка
             EventBlockEntity newEventBlockEntity = new EventBlockEntity();
-
             newEventBlockEntity.setVehicleId(vehicle);
-
             eventBlockRepository.save(newEventBlockEntity);
+
+            // при создании надо привязывать
+            vehiclePositions.get(0).setEventId(newEventBlockEntity.getId());
 
         } else if (!Objects.equals(lastPointFromCache.getEventId(), vehiclePositions.get(0).getEventId())) {
             // последний элемент предыдущего запроса имел другое событие, нужно закрыть прошлый блок и создать новый
