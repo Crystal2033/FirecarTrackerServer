@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class VehicleStatRequest {
-    String id;
-    String vehicleId;
+    private String vehicleId;
 }

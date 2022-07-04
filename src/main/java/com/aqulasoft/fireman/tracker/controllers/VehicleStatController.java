@@ -17,7 +17,7 @@ public class VehicleStatController {
     }
 
     @PostMapping("")
-    public VehicleStatRequest addVehicle(@RequestBody VehicleStatRequest vehicleStatRequest) {
+    public VehicleStatRequest addVehicle(@RequestBody VehicleStatRequest vehicleStatRequest){
         return vehicleStatService.addVehicle(vehicleStatRequest);
     }
 }
