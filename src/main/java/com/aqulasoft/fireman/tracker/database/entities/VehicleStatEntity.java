@@ -23,9 +23,15 @@ public class VehicleStatEntity {
     @Column(length = 32, updatable = false, nullable = false)
     private String id;
 
-    @OneToOne (mappedBy = "vehicleId")
-    @JoinColumn (name="pos_block_head_id")
-    private EventBlockEntity posBlockHead;
+    @OneToMany (mappedBy = "vehicleId")
+    //@JoinColumn (name="last_event_block_id")
+    private List<EventBlockEntity> eventBlocks;
+
+    @OneToOne
+    @JoinColumn(name="last_event_block_id")
+    private EventBlockEntity lastEventBlockId;
+
+
 
     private String vehicleId;
 

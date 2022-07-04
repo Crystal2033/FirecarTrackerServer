@@ -21,7 +21,7 @@ public class TrackerController {
     }
 
     @PostMapping("")
-    public VehiclePositionsRequest addPositions(@RequestBody VehiclePositionsRequest vehiclePositions) throws EmptyArrayException, EmptyVehicleException, EmptyEventBlockException {
+    public VehiclePositionsRequest addPositions(@RequestBody VehiclePositionsRequest vehiclePositions) throws EmptyArrayException, EmptyVehicleException {
         return trackerServices.addPositions(vehiclePositions);
     }
 }
