@@ -41,22 +41,21 @@ public class TrackerServiceImpl implements TrackerServices {
     public VehiclePositionsRequest addPositions(VehiclePositionsRequest vehiclePositionsRequest)
             throws EmptyArrayException, EmptyVehicleException, EmptyEventBlockException {
 
-        if(vehiclePositionsRequest.getPositions().isEmpty()){
+        if (vehiclePositionsRequest.getPositions().isEmpty()) {
             throw new EmptyArrayException();
         }
 
         List<VehiclePositionDto> vehiclePositions = vehiclePositionsRequest.getPositions();
         VehiclePositionDto lastPointFromCache = dictionary.getLastPoint(vehiclePositionsRequest.getVehicleId());
 
-        Optional<VehicleStatEntity> vehicleOptional = vehicleStatRepository.findOptionalById(vehiclePositionsRequest.getVehicleId());
+        Optional<VehicleStatEntity> vehicleOptional
+                = vehicleStatRepository.findOptionalById(vehiclePositionsRequest.getVehicleId());
         VehicleStatEntity vehicle = vehicleOptional.orElseThrow(EmptyVehicleException::new);
         // проверка для первого элемента
         if (lastPointFromCache == null) {
             // нет машины в словаре (с прошлых запросов). Создаем блок. То есть это начало работы машины. Создается голова списка
             EventBlockEntity newEventBlockEntity = new EventBlockEntity();
-
             newEventBlockEntity.setVehicleId(vehicle);
-
             eventBlockRepository.save(newEventBlockEntity);
 
         } else if (!Objects.equals(lastPointFromCache.getEventId(), vehiclePositions.get(0).getEventId())) {
@@ -72,13 +71,12 @@ public class TrackerServiceImpl implements TrackerServices {
             eventBlockRepository.save(newEventBlockEntity);
         }
 
-
-        Optional<EventBlockEntity> currentEventBlockOptional
-                = eventBlockRepository.findOptionalById(vehiclePositions.get(0).getEventId());
+        Optional<EventBlockEntity> currentEventBlockOptional = eventBlockRepository.findOptionalById(vehiclePositions.get(0).getEventId());
         EventBlockEntity currentEventBlockEntity = currentEventBlockOptional.orElseThrow(EmptyEventBlockException::new);
 
         List<VehiclePositionEntity> currentEventBlockPositions = new ArrayList<>();
         for (int i = 0; i < vehiclePositions.size() - 1; i++) {
+
             VehiclePositionEntity currentPositionEntity = mapper.map(vehiclePositions.get(i), VehiclePositionEntity.class);
             currentPositionEntity.setPosBlock(currentEventBlockEntity);
 
@@ -99,23 +97,24 @@ public class TrackerServiceImpl implements TrackerServices {
 
                 currentEventBlockEntity.setPositions(positionEntities);
                 eventBlockRepository.save(currentEventBlockEntity);
-                positionEntities.clear();
+                currentEventBlockPositions.clear();
 
                 currentEventBlockEntity = newEventBlockEntity;
                 eventBlockRepository.save(newEventBlockEntity);
             }
         }
+
         //Adding last element which was not added in the loop
         VehiclePositionEntity currentPositionEntity = mapper.map(vehiclePositions.get(vehiclePositions.size() - 1), VehiclePositionEntity.class);
-        currentPositionEntity.setPosBlock(currentEventBlockEntity);
-        currentEventBlockPositions.add(currentPositionEntity);
+        currentPositionEntity.setPosBlock(currentEventBlockEntity); // задаем точке event
+        currentEventBlockPositions.add(currentPositionEntity); // добавляем точку в массив сущностей точек event'а
 
         List<VehiclePositionEntity> positionEntities = currentEventBlockEntity.getPositions();
         positionEntities.addAll(currentEventBlockPositions);
 
         currentEventBlockEntity.setPositions(positionEntities);
         eventBlockRepository.save(currentEventBlockEntity);
-        positionEntities.clear();
+        currentEventBlockPositions.clear();
 
         vehiclePositionRepository.save(currentPositionEntity);
 
