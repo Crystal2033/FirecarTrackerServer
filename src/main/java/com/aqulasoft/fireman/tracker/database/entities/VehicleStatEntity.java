@@ -31,8 +31,6 @@ public class VehicleStatEntity {
     @JoinColumn(name="last_event_block_id")
     private EventBlockEntity lastEventBlockId;
 
-
-
     private String vehicleId;
 
     @CreationTimestamp

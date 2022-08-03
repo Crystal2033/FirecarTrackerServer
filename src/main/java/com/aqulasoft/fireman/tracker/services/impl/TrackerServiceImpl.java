@@ -51,6 +51,7 @@ public class TrackerServiceImpl implements TrackerServices {
 
         Optional<VehicleStatEntity> vehicleOptional = vehicleStatRepository.findOptionalById(vehiclePositionsRequest.getVehicleId());
         VehicleStatEntity vehicle = vehicleOptional.orElseThrow(EmptyVehicleException::new);
+
         // проверка для первого элемента
         if (lastPointFromCache == null) {
             // нет машины в словаре (с прошлых запросов). Создаем блок. То есть это начало работы машины. Создается голова списка
@@ -73,7 +74,6 @@ public class TrackerServiceImpl implements TrackerServices {
             newEventBlockEntity.setNextPosBlockId(previousEventBlockOptional);
 
             eventBlockRepository.save(newEventBlockEntity);
-
         }
 
         EventBlockEntity currentEventBlockEntity = vehicle.getLastEventBlockId();
