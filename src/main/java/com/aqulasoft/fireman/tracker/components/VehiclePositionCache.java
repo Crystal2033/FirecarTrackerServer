@@ -1,12 +1,8 @@
 package com.aqulasoft.fireman.tracker.components;
 
-
 import com.aqulasoft.fireman.tracker.models.VehiclePositionDto;
-
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 @Component
@@ -20,5 +16,4 @@ public class VehiclePositionCache {
     public VehiclePositionDto getLastPoint(String vehicleId) {
         return dictionary.get(vehicleId);
     }
-
 }

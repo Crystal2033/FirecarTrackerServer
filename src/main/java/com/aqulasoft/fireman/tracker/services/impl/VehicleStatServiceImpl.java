@@ -19,8 +19,7 @@ public class VehicleStatServiceImpl implements VehicleStatService {
 
     @Override
     public VehicleStatRequest addVehicle(VehicleStatRequest vehicleStatRequest) {
-        if(vehicleStatRequest.getVehicleId() != null)
-        {
+        if (vehicleStatRequest.getVehicleId() != null) {
             VehicleStatEntity vehicle = mapper.map(vehicleStatRequest, VehicleStatEntity.class);
             vehicle.setVehicleId(vehicleStatRequest.getVehicleId());
             vehicleStatRepository.save(vehicle);
